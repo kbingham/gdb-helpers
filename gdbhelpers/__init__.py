@@ -18,3 +18,4 @@ import gdbhelpers.emacs
 import gdbhelpers.utils
 import gdbhelpers.colorize
 import gdbhelpers.gdbdebug
+import gdbhelpers.hexdump
