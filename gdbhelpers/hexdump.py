@@ -44,6 +44,13 @@ class HexDump(gdb.Command):
         if align:
             pr_offset = width - (pr_addr % width)
             pr_addr -= pr_addr % width
+        start=(pr_addr) & 0xff;
+
+
+        print ('            ' , end="")
+        print ('  '.join(['%01X' % (i&0x0f,) for i in range(start,start+width)]) , end="")
+        print ('  ' , end="")
+        print (''.join(['%01X' % (i&0x0f,) for i in range(start,start+width)]) )
 
         for group in groups_of(mem, width, pr_offset):
             print '0x%x: ' % (pr_addr,) + '   '*(width - pr_offset),
