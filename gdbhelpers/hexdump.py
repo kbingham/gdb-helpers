@@ -53,11 +53,11 @@ class HexDump(gdb.Command):
         print (''.join(['%01X' % (i&0x0f,) for i in range(start,start+width)]) )
 
         for group in groups_of(mem, width, pr_offset):
-            print '0x%x: ' % (pr_addr,) + '   '*(width - pr_offset),
-            print ' '.join(['%02X' % (ord(g),) for g in group]) + \
-                '   ' * (width - len(group) if pr_offset == width else 0) + ' ',
-            print ' '*(width - pr_offset) +  ''.join(
-                [g if isgraph(g) or g == ' ' else '.' for g in group])
+            print ('0x%x: ' % (pr_addr,) + '   '*(width - pr_offset), end="")
+            print (' '.join(['%02X' % (ord(g),) for g in group]) + \
+                '   ' * (width - len(group) if pr_offset == width else 0) + ' ', end="")
+            print (' '*(width - pr_offset) +  ''.join(
+                [chr( int.from_bytes(g, byteorder='big')) if isgraph( int.from_bytes(g, byteorder='big')   ) or g == ' ' else '.' for g in group]))
             pr_addr += width
             pr_offset = width
 
