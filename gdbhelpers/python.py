@@ -26,6 +26,17 @@ the result to gdb.  STR is a string which is parsed and evalled."""
 
 Python()
 
+class PyVersion(gdb.Command):
+    """Report python version information """
+
+    def __init__(self):
+        super(PyVersion, self).__init__("python-version", gdb.COMMAND_DATA)
+
+    def invoke(self, arg, from_tty):
+        gdb.write(sys.version + "\n")
+
+PyVersion()
+
 class PyReload(gdb.Command):
     """$reload python modules
 """
